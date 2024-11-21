@@ -1,4 +1,4 @@
-Organizations:
+cleaOrganizations:
   - &organization_nameOrdererMSP
     Name: organization_nameOrdererMSP
     ID: organization_nameOrdererMSP
