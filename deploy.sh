@@ -7,7 +7,7 @@ function exportVariables(){
   # Organization information that you wish to build and deploy
   export NAME_OF_ORGANIZATION=$NAME_OF_ORGANIZATION
   export DOMAIN_OF_ORGANIZATION=$DOMAIN_OF_ORGANIZATION
-  export HOST_COMPUTER_IP_ADDRESS=$HOST_COMPUTER_IP_ADDRESS
+  export HOST_IP_ADDRESS=$HOST_IP_ADDRESS
   export ORGANIZATION_NAME_LOWERCASE=`echo "$NAME_OF_ORGANIZATION" | tr '[:upper:]' '[:lower:]'`
   export CA_ADDRESS_PORT=ca.$DOMAIN_OF_ORGANIZATION:7054
 
@@ -30,14 +30,15 @@ function exportVariables(){
 
 read -p "Organization Name: "  NAME_OF_ORGANIZATION
 read -p "Organization Domain: " DOMAIN_OF_ORGANIZATION
-read -p "Computer IP Address: " HOST_COMPUTER_IP_ADDRESS
+HOST_IP_ADDRESS=172.17.0.1
+ORGANIZATION_CHANNEL=donationchannel
 
 exportVariables
 
 ./clean-all.sh
 
 # Substitutes organizations information in the configtx template to match organizations name, domain and ip address
-sed -e 's/organization_name/'$NAME_OF_ORGANIZATION'/g' -e 's/organization_domain/'$DOMAIN_OF_ORGANIZATION'/g' -e 's/ip_address/'$HOST_COMPUTER_IP_ADDRESS'/g'  configtx_template.yaml > configtx.yaml
+sed -e 's/organization_name/'$NAME_OF_ORGANIZATION'/g' -e 's/organization_domain/'$DOMAIN_OF_ORGANIZATION'/g' -e 's/ip_address/'$HOST_IP_ADDRESS'/g'  configtx_template.yaml > configtx.yaml
 
 # Start the certficate authority
 docker-compose -p fabric-network -f docker-compose.yml up -d ca
@@ -46,13 +47,13 @@ sleep 3
 # Generate identity and cryptographic materials for the 3 orderers 
 for ORDERER_NUMBER in 1 2 3
 do
-  docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/bash -c "cd /etc/hyperledger/artifacts/  && ./orderer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_COMPUTER_IP_ADDRESS $CA_ADMIN_USER $CA_ADMIN_PASSWORD $ORDERER_NUMBER $ORDERER_PASSWORD"
+  docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/bash -c "cd /etc/hyperledger/artifacts/  && ./orderer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_IP_ADDRESS $CA_ADMIN_USER $CA_ADMIN_PASSWORD $ORDERER_NUMBER $ORDERER_PASSWORD"
 done
 
 # Generate identity and cryptographic materials for the peer 
 for PEER_NUMBER in 1 2 
 do
-  docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/bash -c "cd /etc/hyperledger/artifacts/  && ./peer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_COMPUTER_IP_ADDRESS $PEER_PASSWORD $PEER_NUMBER"
+  docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/bash -c "cd /etc/hyperledger/artifacts/  && ./peer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_IP_ADDRESS $PEER_PASSWORD $PEER_NUMBER"
 done
 
 
@@ -89,7 +90,7 @@ do
 done
 
 # Generate the channel configuration 
-./generate.sh ${ORGANIZATION_NAME_LOWERCASE}channel $NAME_OF_ORGANIZATION
+./generate.sh $ORGANIZATION_CHANNEL $NAME_OF_ORGANIZATION
 sleep 2
 
 # Start the network with docker-compose
@@ -100,21 +101,21 @@ docker-compose -f docker-compose.yml up -d orderer2
 docker-compose -f docker-compose.yml up -d orderer3
 
 # Join the orders to the channel
-docker exec cli osnadmin channel join -o orderer1.$DOMAIN_OF_ORGANIZATION:7053 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/server.key 
+docker exec cli osnadmin channel join -o orderer1.$DOMAIN_OF_ORGANIZATION:7053 --channelID $ORGANIZATION_CHANNEL --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/server.key 
 
-docker exec cli osnadmin channel join -o orderer2.$DOMAIN_OF_ORGANIZATION:8053 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/server.key 
+docker exec cli osnadmin channel join -o orderer2.$DOMAIN_OF_ORGANIZATION:8053 --channelID $ORGANIZATION_CHANNEL --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/server.key 
 
-docker exec cli osnadmin channel join -o orderer3.$DOMAIN_OF_ORGANIZATION:9053 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/server.key 
+docker exec cli osnadmin channel join -o orderer3.$DOMAIN_OF_ORGANIZATION:9053 --channelID $ORGANIZATION_CHANNEL --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/server.key 
 
 sleep 3
 
-docker exec cli peer channel fetch 0 channel.block -c ${ORGANIZATION_NAME_LOWERCASE}channel -o orderer1.${DOMAIN_OF_ORGANIZATION}:7050 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.${DOMAIN_OF_ORGANIZATION}/tls/ca.crt
+docker exec cli peer channel fetch 0 channel.block -c $ORGANIZATION_CHANNEL -o orderer1.${DOMAIN_OF_ORGANIZATION}:7050 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.${DOMAIN_OF_ORGANIZATION}/tls/ca.crt
 
 sleep 1
 
 docker exec cli peer channel join -b channel.block
 
-docker exec -e CORE_PEER_LOCALMSPID="${NAME_OF_ORGANIZATION}MSP" -e CORE_PEER_ADDRESS="peer2.$DOMAIN_OF_ORGANIZATION:7051" -e CORE_PEER_MSPCONFIGPATH="/etc/hyperledger/crypto-config/peerOrganizations/users/Admin@peer2.$DOMAIN_OF_ORGANIZATION/msp" -e CORE_PEER_TLS_ROOTCERT_FILE="/etc/hyperledger/crypto-config/peerOrganizations/peers/peer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" cli peer channel fetch 0 channel.block -c ${ORGANIZATION_NAME_LOWERCASE}channel -o orderer1.${DOMAIN_OF_ORGANIZATION}:7050 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.${DOMAIN_OF_ORGANIZATION}/tls/ca.crt
+docker exec -e CORE_PEER_LOCALMSPID="${NAME_OF_ORGANIZATION}MSP" -e CORE_PEER_ADDRESS="peer2.$DOMAIN_OF_ORGANIZATION:7051" -e CORE_PEER_MSPCONFIGPATH="/etc/hyperledger/crypto-config/peerOrganizations/users/Admin@peer2.$DOMAIN_OF_ORGANIZATION/msp" -e CORE_PEER_TLS_ROOTCERT_FILE="/etc/hyperledger/crypto-config/peerOrganizations/peers/peer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" cli peer channel fetch 0 channel.block -c $ORGANIZATION_CHANNEL -o orderer1.${DOMAIN_OF_ORGANIZATION}:7050 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.${DOMAIN_OF_ORGANIZATION}/tls/ca.crt
 
 docker exec -e CORE_PEER_LOCALMSPID="${NAME_OF_ORGANIZATION}MSP" -e CORE_PEER_ADDRESS="peer2.$DOMAIN_OF_ORGANIZATION:7051" -e CORE_PEER_MSPCONFIGPATH="/etc/hyperledger/crypto-config/peerOrganizations/users/Admin@peer2.$DOMAIN_OF_ORGANIZATION/msp" -e CORE_PEER_TLS_ROOTCERT_FILE="/etc/hyperledger/crypto-config/peerOrganizations/peers/peer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" cli peer channel join -b channel.block
 
@@ -130,24 +131,24 @@ export PACKAGE_ID=`sed -n '/Package/{s/^Package ID: //; s/, Label:.*$//; p;}' lo
 echo $PACKAGE_ID
 
 # Approve chaincode for org
-docker exec cli peer lifecycle chaincode approveformyorg -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 --ordererTLSHostnameOverride orderer1.$DOMAIN_OF_ORGANIZATION --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --name chaincode --version 1.0 --sequence 1 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --package-id ${PACKAGE_ID}
+docker exec cli peer lifecycle chaincode approveformyorg -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 --ordererTLSHostnameOverride orderer1.$DOMAIN_OF_ORGANIZATION --channelID $ORGANIZATION_CHANNEL --name chaincode --version 1.0 --sequence 1 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --package-id ${PACKAGE_ID}
 
 # Check commit readiness
-docker exec cli peer lifecycle chaincode checkcommitreadiness --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --name chaincode --version 1.0 --sequence 1 --tls true --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --output json
+docker exec cli peer lifecycle chaincode checkcommitreadiness --channelID $ORGANIZATION_CHANNEL --name chaincode --version 1.0 --sequence 1 --tls true --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --output json
 
 # Commit the chaincode
-docker exec cli peer lifecycle chaincode commit -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --name chaincode --version 1.0 --sequence 1 --tls true --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --peerAddresses peer1.$DOMAIN_OF_ORGANIZATION:7051 --tlsRootCertFiles /etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt 
+docker exec cli peer lifecycle chaincode commit -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 --channelID $ORGANIZATION_CHANNEL --name chaincode --version 1.0 --sequence 1 --tls true --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --peerAddresses peer1.$DOMAIN_OF_ORGANIZATION:7051 --tlsRootCertFiles /etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt 
 
-docker exec cli peer chaincode invoke -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 -C ${ORGANIZATION_NAME_LOWERCASE}channel -n chaincode -c '{"Args":["invokeTransaction","1","{anythingHereAsJsonPayload}"]}' --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
+docker exec cli peer chaincode invoke -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 -C $ORGANIZATION_CHANNEL -n chaincode -c '{"Args":["invokeTransaction","1","{anythingHereAsJsonPayload}"]}' --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
 
 sleep 2 
 
-docker exec cli peer chaincode query -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 -C ${ORGANIZATION_NAME_LOWERCASE}channel -n chaincode -c '{"Args":["queryBlockchain","1"]}' --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
+docker exec cli peer chaincode query -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 -C $ORGANIZATION_CHANNEL -n chaincode -c '{"Args":["queryBlockchain","1"]}' --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
 
 # Query Installed chaincode on peer
 docker exec cli peer lifecycle chaincode queryinstalled --peerAddresses peer1.$DOMAIN_OF_ORGANIZATION:7051 --tlsRootCertFiles /etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
 
 # Query commited chaincode on the channel
-docker exec cli peer lifecycle chaincode querycommitted -o orderer.$DOMAIN_OF_ORGANIZATION:7050 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --peerAddresses peer1.$DOMAIN_OF_ORGANIZATION:7051 --tlsRootCertFiles /etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
+docker exec cli peer lifecycle chaincode querycommitted -o orderer.$DOMAIN_OF_ORGANIZATION:7050 --channelID $ORGANIZATION_CHANNEL --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --peerAddresses peer1.$DOMAIN_OF_ORGANIZATION:7051 --tlsRootCertFiles /etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
 
 echo NETWORK DEPLOYMENT COMPLETED SUCCESSFULLY

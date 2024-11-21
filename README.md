@@ -71,9 +71,6 @@ Node Client
 
 The node client is used to transact with the network using POST requests
 
-The client API uses NodeExpress and uses port 3000. If you want to use Kong, just change the port to 8000
-
-
 The first step is to enroll the admin
 
 Endpoint: http://localhost:3000/enrollAdmin

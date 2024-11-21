@@ -7,7 +7,7 @@ function exportVariables(){
   # Organization information that you wish to build and deploy
   export NAME_OF_ORGANIZATION=$NAME_OF_ORGANIZATION
   export DOMAIN_OF_ORGANIZATION=$DOMAIN_OF_ORGANIZATION
-  export HOST_COMPUTER_IP_ADDRESS=$HOST_COMPUTER_IP_ADDRESS
+  export HOST_IP_ADDRESS=$HOST_IP_ADDRESS
   export ORGANIZATION_NAME_LOWERCASE=`echo "$NAME_OF_ORGANIZATION" | tr '[:upper:]' '[:lower:]'`
   export CA_ADDRESS_PORT=ca.$DOMAIN_OF_ORGANIZATION:7054
 
@@ -30,28 +30,28 @@ function exportVariables(){
 
 read -p "Organization Name: "  NAME_OF_ORGANIZATION
 read -p "Organization Domain: " DOMAIN_OF_ORGANIZATION
-read -p "Computer IP Address: " HOST_COMPUTER_IP_ADDRESS
+HOST_IP_ADDRESS=172.17.0.1
 
 exportVariables
 
 ./clean-all.sh
 
 # Substitutes organizations information in the configtx template to match organizations name, domain and ip address
-sed -e 's/organization_name/'$NAME_OF_ORGANIZATION'/g' -e 's/organization_domain/'$DOMAIN_OF_ORGANIZATION'/g' -e 's/ip_address/'$HOST_COMPUTER_IP_ADDRESS'/g'  configtx_template.yaml > configtx.yaml
+sed -e 's/organization_name/'$NAME_OF_ORGANIZATION'/g' -e 's/organization_domain/'$DOMAIN_OF_ORGANIZATION'/g' -e 's/ip_address/'$HOST_IP_ADDRESS'/g'  configtx_template.yaml > configtx.yaml
 
 # Start the certficate authority
 docker-compose -p fabric-network -f docker-compose.yml up -d ca
 sleep 3
 
-docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/sh -c "cd /etc/hyperledger/artifacts/  && ./orderer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_COMPUTER_IP_ADDRESS $CA_ADMIN_USER $CA_ADMIN_PASSWORD $ORDERER_PASSWORD"
+docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/sh -c "cd /etc/hyperledger/artifacts/  && ./orderer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_IP_ADDRESS $CA_ADMIN_USER $CA_ADMIN_PASSWORD $ORDERER_PASSWORD"
 
 
 # Generate identity and cryptographic materials for the peer 
-docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/sh -c "cd /etc/hyperledger/artifacts/  && ./peer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_COMPUTER_IP_ADDRESS $PEER_PASSWORD"
+docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/sh -c "cd /etc/hyperledger/artifacts/  && ./peer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_IP_ADDRESS $PEER_PASSWORD"
 
 # Move the crypto-config folder to manipulate it more easily away from the dockers users' restrictions
 sudo mv ./${ORGANIZATION_NAME_LOWERCASE}Ca/client/crypto-config ./
-sudo chmod -R 777 ./crypto-config
+sudo chmod -R 777 ./crypto-configCOMPUTER_
 
 # Move TLS certificates for the orderer
 
