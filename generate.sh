@@ -2,8 +2,7 @@
 export PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:${PWD}/../bin:${PWD}:$PATH
 
 # Set the Fabric configuration path
-export FABRIC_CFG_PATH=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fabric-idonate-network
-
+export FABRIC_CFG_PATH= ${PWD}
 # Set the binary directory (no spaces around `=`)
 # export BINARY_DIR=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fabric-idonate-network/bin
 
