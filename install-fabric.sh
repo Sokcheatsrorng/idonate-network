@@ -27,11 +27,6 @@ sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
 
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
-sudo apt -y install nodejs
-
-sudo apt-get install npm
-
-sudo npm install -g npm@latest 
 
 wget https://dl.google.com/go/go1.11.12.linux-amd64.tar.gz
 
