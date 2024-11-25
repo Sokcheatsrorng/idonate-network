@@ -5,13 +5,12 @@ binary option:
     case {{option}} in
         install)
             echo "Install Binary"
-            bash ./installBinary.sh 
+            bash ./scripts/installBinary.sh 
             ;;
         *)
             echo "Invalid Option"
             ;;
     esac
-
 
 network option:
     #!/bin/bash
@@ -19,8 +18,7 @@ network option:
         create)
             echo "Create Network" 
             bash ./deploy.sh
-            docker run -d -p 8000:8000 -p 8888:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:alpine
-
+            
             ;;
         destroy)
             echo "Destroy Network" 
@@ -41,13 +39,15 @@ dashboard option:
     case {{option}} in
         start)
             echo "Start Dashboard"
-            cd prometheus-grafana
-            docker-compose up -d
+            cd monitoring
+            docker compose down -v
+            docker compose pull 
+            docker compose up -d
             ;;
         stop)
             echo "Stop Dashboard"
-            cd prometheus-grafana
-            docker-compose down -v
+            cd monitoring
+            docker compose down -v
             ;;
         *)
             echo "Invalid Option"

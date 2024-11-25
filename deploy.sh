@@ -13,12 +13,12 @@ function exportVariables(){
 
   # Security defaults
   # Couch DB credentials
-  export COUCH_DB_USERNAME=admin
-  export COUCH_DB_PASSWORD=adminpw
+  export COUCH_DB_USERNAME=idonateAdmin
+  export COUCH_DB_PASSWORD=idonatepw
 
   # Certificate authority credentials
-  export CA_ADMIN_USER=admin
-  export CA_ADMIN_PASSWORD=adminpw
+  export CA_ADMIN_USER=idonateAdmin
+  export CA_ADMIN_PASSWORD=idonatepw
 
   # Orderer credentials
   ORDERER_PASSWORD=adminpw
@@ -30,7 +30,8 @@ function exportVariables(){
 
 read -p "Organization Name: "  NAME_OF_ORGANIZATION
 read -p "Organization Domain: " DOMAIN_OF_ORGANIZATION
-HOST_IP_ADDRESS=172.17.0.1
+
+HOST_IP_ADDRESS=$(hostname -I | awk '{print $1}')
 ORGANIZATION_CHANNEL=donationchannel
 
 exportVariables

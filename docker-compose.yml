@@ -1,6 +1,3 @@
-# SPDX-License-Identifier: Apache-2.0
-version: "2"
-
 networks:
   fabric:
 
@@ -42,6 +39,7 @@ services:
       - CORE_CHAINCODE_LOGGING_LEVEL=debug
       - CORE_PEER_LOCALMSPID=${NAME_OF_ORGANIZATION}MSP
       - CORE_METRICS_PROVIDER=prometheus
+      - CORE_OPERATIONS_LISTENADDRESS=peer1.${DOMAIN_OF_ORGANIZATION}:9444
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/users/Admin@peer1.${DOMAIN_OF_ORGANIZATION}/msp
       - CORE_PEER_ADDRESS=peer1.${DOMAIN_OF_ORGANIZATION}:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.${DOMAIN_OF_ORGANIZATION}:7051
@@ -60,6 +58,7 @@ services:
     command: peer node start
     ports:
       - 7051:7051
+      - 9444:9444
     volumes:
       - /var/run/:/host/var/run/
       - ./crypto-config/peerOrganizations/:/etc/hyperledger/peer
@@ -165,6 +164,7 @@ services:
       - ORDERER_GENERAL_LOCALMSPID=${NAME_OF_ORGANIZATION}OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/orderer/msp
       - CORE_METRICS_PROVIDER=prometheus
+      - CORE_OPERATIONS_LISTENADDRESS=orderer1.${DOMAIN_OF_ORGANIZATION}:9443
       # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/etc/hyperledger/orderer/tls/server.key
@@ -188,6 +188,7 @@ services:
     ports:
       - 7050:7050
       - 7053:7053
+      - 9443:9443
     volumes:
       - ./crypto-config/ordererOrganizations/orderers/orderer1.${DOMAIN_OF_ORGANIZATION}/:/etc/hyperledger/orderer
     networks:

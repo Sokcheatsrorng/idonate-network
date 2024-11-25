@@ -1,0 +1,38 @@
+
+networks:
+  fabric:
+    name: hyperledger-fabric-idonate-network_fabric
+    external: true
+
+
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    tty: true
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    networks:
+      - fabric
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    environment:
+      - GF_AUTH_PROXY_ENABLED=true
+      - GF_SECURITY_ADMIN_USER=idonateadmin
+      - GF_SECURITY_ADMIN_PASSWORD=idonatepw
+      - GF_PATHS_PROVISIONING=/var/lib/grafana/provisioning
+    volumes:
+      - ./provisioning:/var/lib/grafana/provisioning
+    ports:
+      - "3000:3000"
+    networks:
+      - fabric
+    depends_on:
+      - prometheus
+

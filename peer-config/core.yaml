@@ -698,6 +698,7 @@ operations:
 metrics:
   # metrics provider is one of statsd, prometheus, or disabled
   provider: disabled
+  # enabled: true
 
   # statsd configuration
   statsd:
@@ -705,7 +706,7 @@ metrics:
     network: udp
 
     # statsd server address
-    address: 127.0.0.1:8125
+    address: 0.0.0.1:8125
 
     # the interval at which locally cached counters and gauges are pushed
     # to statsd; timings are pushed immediately

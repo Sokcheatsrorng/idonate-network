@@ -14,7 +14,7 @@ ORDERER_DIRECTORY=/etc/hyperledger/fabric-ca-client/crypto-config/ordererOrganiz
 
 # Enroll CA Admin
 fabric-ca-client enroll -d -u https://$CA_ADMIN_USER:$CA_ADMIN_PASSWORD@$CA_ADDRESS_PORT
-#fabric-ca-client enroll -d -u https://admin:adminpw@ca.zeroflow.com:7054
+
 
 # Rename Key file to key.pem
 mv /etc/hyperledger/fabric-ca-server/msp/keystore/*_sk /etc/hyperledger/fabric-ca-server/msp/keystore/key.pem

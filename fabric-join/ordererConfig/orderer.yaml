@@ -107,7 +107,7 @@ Metrics:
   Statsd:
     # network type: tcp or udp
     Network: udp
-    Address: 127.0.0.1:8125
+    Address: 0.0.0.1:8125
     WriteInterval: 30s
     Prefix:
 

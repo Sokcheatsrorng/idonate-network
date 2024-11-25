@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: Apache-2.0
 
 CA_ADDRESS_PORT=$1
 COMPANY_DOMAIN=$2
