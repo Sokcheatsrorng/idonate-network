@@ -1,154 +1,302 @@
+#!/bin/bash
 # SPDX-License-Identifier: Apache-2.0
-#set -ev
-#!/bin/sh
 
-function exportVariables(){
+# Set strict error handling
+set -euo pipefail
 
-  # Organization information that you wish to build and deploy
-  export NAME_OF_ORGANIZATION=$NAME_OF_ORGANIZATION
-  export DOMAIN_OF_ORGANIZATION=$DOMAIN_OF_ORGANIZATION
-  export HOST_COMPUTER_IP_ADDRESS=$HOST_COMPUTER_IP_ADDRESS
-  export ORGANIZATION_NAME_LOWERCASE=`echo "$NAME_OF_ORGANIZATION" | tr '[:upper:]' '[:lower:]'`
-  export CA_ADDRESS_PORT=ca.$DOMAIN_OF_ORGANIZATION:7054
+# Global variables
+readonly LOG_FILE="deployment.log"
+readonly ORGANIZATION_CHANNEL="donationchannel"
 
-  # Security defaults
-  # Couch DB credentials
-  export COUCH_DB_USERNAME=admin
-  export COUCH_DB_PASSWORD=adminpw
+# Colors for logging
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[1;33m'
+readonly NC='\033[0m' # No Color
 
-  # Certificate authority credentials
-  export CA_ADMIN_USER=idonateadmin
-  export CA_ADMIN_PASSWORD=idonatepw
-
-  # Orderer credentials
-  ORDERER_PASSWORD=adminpw
-
-  # Peer credentials
-  PEER_PASSWORD=peerpw
-
+# Logging functions
+log_info() {
+    echo -e "${GREEN}[INFO]${NC} $(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
 }
 
-read -p "Organization Name: "  NAME_OF_ORGANIZATION
-read -p "Organization Domain: " DOMAIN_OF_ORGANIZATION
-# read -p "Computer IP Address: " HOST_COMPUTER_IP_ADDRESS
-HOST_COMPUTER_IP_ADDRESS=172.17.0.1
+log_warning() {
+    echo -e "${YELLOW}[WARNING]${NC} $(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
+}
 
-exportVariables
+log_error() {
+    echo -e "${RED}[ERROR]${NC} $(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
+}
 
-./clean-all.sh
+# Error handling
+handle_error() {
+    local line_no=$1
+    local error_code=$2
+    log_error "Error occurred in script at line: ${line_no}, error code: ${error_code}"
+    exit "${error_code}"
+}
 
-# Substitutes organizations information in the configtx template to match organizations name, domain and ip address
-sed -e 's/organization_name/'$NAME_OF_ORGANIZATION'/g' -e 's/organization_domain/'$DOMAIN_OF_ORGANIZATION'/g' -e 's/ip_address/'$HOST_COMPUTER_IP_ADDRESS'/g'  configtx_template.yaml > configtx.yaml
+trap 'handle_error ${LINENO} $?' ERR
 
-# Start the certficate authority
-docker-compose -p fabric-network -f docker-compose.yml up -d ca
-sleep 3
+# Initialize environment variables
+init_environment() {
+  
+    log_info "Initializing environment variables"
+    
+    # Organization information
+    export NAME_OF_ORGANIZATION="$1"
+    export DOMAIN_OF_ORGANIZATION="$2"
+    export HOST_IP_ADDRESS=172.17.0.1
+    # HOST_IP_ADDRESS=$(hostname -I | awk '{print $1}')
+    export ORGANIZATION_NAME_LOWERCASE=$(echo "$NAME_OF_ORGANIZATION" | tr '[:upper:]' '[:lower:]')
+    export CA_ADDRESS_PORT="ca.$DOMAIN_OF_ORGANIZATION:7054"
 
-# Generate identity and cryptographic materials for the 3 orderers 
-for ORDERER_NUMBER in 1 2 3
-do
-  docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/bash -c "cd /etc/hyperledger/artifacts/  && ./orderer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_COMPUTER_IP_ADDRESS $CA_ADMIN_USER $CA_ADMIN_PASSWORD $ORDERER_NUMBER $ORDERER_PASSWORD"
-done
+    # Security credentials
+    export COUCH_DB_USERNAME="idonateAdmin"
+    export COUCH_DB_PASSWORD="idonatepw"
+    export CA_ADMIN_USER="idonateAdmin"
+    export CA_ADMIN_PASSWORD="idonatepw"
+    export ORDERER_PASSWORD="ordererpw"
+    export PEER_PASSWORD="peerpw"
 
-# Generate identity and cryptographic materials for the peer 
-for PEER_NUMBER in 1 2 
-do
-  docker exec ca.$DOMAIN_OF_ORGANIZATION /bin/bash -c "cd /etc/hyperledger/artifacts/  && ./peer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION $HOST_COMPUTER_IP_ADDRESS $PEER_PASSWORD $PEER_NUMBER"
-done
+    log_info "Environment variables initialized successfully"
+}
+
+# Setup network configuration
+setup_network_config() {
+
+    log_info "Setting up network configuration"
+    
+    ./clean-all.sh
+    
+    # Generate configtx.yaml from template
+    sed -e "s/organization_name/$NAME_OF_ORGANIZATION/g" \
+        -e "s/organization_domain/$DOMAIN_OF_ORGANIZATION/g" \
+        -e "s/ip_address/$HOST_IP_ADDRESS/g" \
+        configtx_template.yaml > configtx.yaml
+        
+    log_info "Network configuration completed"
+}
+
+# Setup certificate authority
+setup_ca() {
+
+
+  log_info "Starting Certificate Authority"
+
+  # # Start CA container using Docker Compose
+  docker-compose -p fabric-network -f docker-compose.yml up -d ca
+  sleep 3
+
+  # # # Give full permissions to the CA folder
+  # log_info "Giving full permissions to CA folder"
+  # docker exec "ca.$DOMAIN_OF_ORGANIZATION" /bin/bash -c \
+  #     "chmod -R 777 /etc/hyperledger/artifacts/"
+
+  # # # Generate orderer identities
+  for orderer_num in {1..3}; do
+      log_info "Generating identity for orderer$orderer_num"
+
+      docker exec "ca.$DOMAIN_OF_ORGANIZATION" /bin/bash -c \
+          "cd /etc/hyperledger/artifacts/ && \
+          ./orderer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION \
+          $HOST_IP_ADDRESS $CA_ADMIN_USER $CA_ADMIN_PASSWORD \
+          $orderer_num $ORDERER_PASSWORD"
+  done
+
+  # # # Generate peer identities
+  for peer_num in {1..2}; do
+      log_info "Generating identity for peer$peer_num"
+      docker exec "ca.$DOMAIN_OF_ORGANIZATION" /bin/bash -c \
+          "cd /etc/hyperledger/artifacts/ && \
+          ./peer-identity.sh $CA_ADDRESS_PORT $DOMAIN_OF_ORGANIZATION \
+          $HOST_IP_ADDRESS $PEER_PASSWORD $peer_num"
+  done
+
+  # Start the certficate authority
+}
+
+# Setup crypto material
+setup_crypto_material() {
+    log_info "Setting up cryptographic material"
+
+    local source_dir="./${ORGANIZATION_NAME_LOWERCASE}Ca/client/crypto-config"
+    local target_dir="./crypto-config"
+
+    # Ensure the source directory exists
+    if [ ! -d "$source_dir" ]; then
+        log_error "Source directory $source_dir does not exist"
+        exit 1
+    fi
+
+    # Handle the target directory
+    if [ -d "$target_dir" ]; then
+        log_warning "Target directory $target_dir already exists. Clearing its contents..."
+        sudo rm -rf "$target_dir" || {
+            log_error "Failed to clear the target directory"
+            exit 1
+        }
+    fi
+
+    # Move the source directory to the target location
+    log_info "Moving cryptographic material from $source_dir to $target_dir"
+    sudo mv "$source_dir" "$target_dir" || {
+        log_error "Failed to move cryptographic material"
+        exit 1
+    }
+
+    # Set appropriate permissions
+    log_info "Setting permissions for $target_dir"
+    sudo chmod -R 777 "$target_dir" || {
+        log_error "Failed to set permissions for $target_dir"
+        exit 1
+    }
+
+    # Setup orderer TLS certificates
+    log_info "Setting up orderer TLS certificates..."
+    for orderer_num in {1..3}; do
+        setup_orderer_tls "$orderer_num"
+    done
+
+    # Setup peer TLS certificates
+    log_info "Setting up peer TLS certificates..."
+    for peer_num in {1..2}; do
+        setup_peer_tls "$peer_num"
+    done
+
+    log_info "Cryptographic material setup completed successfully"
+}
+
+# Helper function for orderer TLS setup
+setup_orderer_tls() {
+    local orderer_num=$1
+    local orderer_dir="./crypto-config/ordererOrganizations/orderers/orderer${orderer_num}.$DOMAIN_OF_ORGANIZATION"
+    
+    log_info "Setting up TLS for orderer${orderer_num}"
+    
+    sudo mv "${orderer_dir}/tls/signcerts/cert.pem" "${orderer_dir}/tls/server.crt"
+    sudo mv "${orderer_dir}/tls/keystore/"*"_sk" "${orderer_dir}/tls/server.key"
+    sudo mv "${orderer_dir}/tls/tlscacerts/"*.pem "${orderer_dir}/tls/ca.crt"
+    sudo rm -rf "${orderer_dir}/tls/"{"cacerts","keystore","signcerts","tlscacerts","user"}
+}
 
 
 
-# Move the crypto-config folder to manipulate it more easily away from the dockers users' restrictions
-sudo mv ./${ORGANIZATION_NAME_LOWERCASE}Ca/client/crypto-config ./
-sudo chmod -R 777 ./crypto-config
+# Helper function for peer TLS setup
+setup_peer_tls() {
+    local peer_num=$1
+    local peer_dir="./crypto-config/peerOrganizations/peers/peer${peer_num}.$DOMAIN_OF_ORGANIZATION"
+    
+    log_info "Setting up TLS for peer${peer_num}"
+    
+    sudo mv "${peer_dir}/tls/signcerts/cert.pem" "${peer_dir}/tls/server.crt"
+    sudo mv "${peer_dir}/tls/keystore/"*"_sk" "${peer_dir}/tls/server.key"
+    sudo mv "${peer_dir}/tls/tlscacerts/"*.pem "${peer_dir}/tls/ca.crt"
+    sudo rm -rf "${peer_dir}/tls/"{"cacerts","keystore","signcerts","tlscacerts","user"}
+}
 
-# Move TLS certificates for the 3 orderers 
-for ORDERER_NUMBER in 1 2 3
-do
-  ORDERER_DIRECTORY=./crypto-config/ordererOrganizations/orderers
-  sudo mv $ORDERER_DIRECTORY/orderer$ORDERER_NUMBER.$DOMAIN_OF_ORGANIZATION/tls/signcerts/cert.pem $ORDERER_DIRECTORY/orderer$ORDERER_NUMBER.$DOMAIN_OF_ORGANIZATION/tls/server.crt
-  sudo mv $ORDERER_DIRECTORY/orderer$ORDERER_NUMBER.$DOMAIN_OF_ORGANIZATION/tls/keystore/*_sk $ORDERER_DIRECTORY/orderer$ORDERER_NUMBER.$DOMAIN_OF_ORGANIZATION/tls/server.key
-  sudo mv $ORDERER_DIRECTORY/orderer$ORDERER_NUMBER.$DOMAIN_OF_ORGANIZATION/tls/tlscacerts/*.pem $ORDERER_DIRECTORY/orderer$ORDERER_NUMBER.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
+# Deploy network
+deploy_network() {
 
-  # Delete empty directories
-  sudo rm -rf $ORDERER_DIRECTORY/orderer$ORDERER_NUMBER.$DOMAIN_OF_ORGANIZATION/tls/{cacerts,keystore,signcerts,tlscacerts,user}
-done
+    log_info "Deploying network"
+    
+    ./generate.sh "$ORGANIZATION_CHANNEL" "$NAME_OF_ORGANIZATION"
+    sleep 2
+    
+    docker-compose -f docker-compose.yml up -d peer peer2 couchdb cli
+    sleep 2
+    docker-compose -f docker-compose.yml up -d orderer2 orderer3
+    
+    join_orderers_to_channel
+    join_peers_to_channel
+}
 
-# Move TLS certificates for the 2 peers 
-for PEER_NUMBER in 1 2
-do
-  # Peer 1 crypto-config directory
-  PEER_DIRECTORY=./crypto-config/peerOrganizations/peers/peer$PEER_NUMBER.$DOMAIN_OF_ORGANIZATION
+# Join orderers to channel
+join_orderers_to_channel() {
+    log_info "Joining orderers to channel"
+    
+    for orderer_num in {1..3}; do
+        local port=$((7053 + (orderer_num - 1) * 1000))
+        docker exec cli osnadmin channel join \
+            -o "orderer${orderer_num}.$DOMAIN_OF_ORGANIZATION:${port}" \
+            --channelID "$ORGANIZATION_CHANNEL" \
+            --config-block /etc/hyperledger/artifacts/channel.tx \
+            --ca-file "/etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer${orderer_num}.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" \
+            --client-cert "/etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer${orderer_num}.$DOMAIN_OF_ORGANIZATION/tls/server.crt" \
+            --client-key "/etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer${orderer_num}.$DOMAIN_OF_ORGANIZATION/tls/server.key"
+    done
+}
 
-  # Move the Peer TLS files to match cryptogen hierarchy
-  sudo mv $PEER_DIRECTORY/tls/signcerts/cert.pem $PEER_DIRECTORY/tls/server.crt
-  sudo mv $PEER_DIRECTORY/tls/keystore/*_sk $PEER_DIRECTORY/tls/server.key
-  sudo mv $PEER_DIRECTORY/tls/tlscacerts/*.pem $PEER_DIRECTORY/tls/ca.crt
+# Join peers to channel
+join_peers_to_channel() {
+    log_info "Joining peers to channel"
+    
+    for peer_num in {1..2}; do
+        docker exec cli peer channel join \
+            -b "/etc/hyperledger/artifacts/channel.block"
+    done
+}
 
-  # Delete the peers empty directory
-  sudo rm -rf $PEER_DIRECTORY/tls/{cacerts,keystore,signcerts,tlscacerts,user}
-done
+# Deploy chaincode
+deploy_chaincode() {
+    log_info "Deploying chaincode"
+    
+    # Package and install chaincode
+    docker exec cli peer lifecycle chaincode package chaincode.tar.gz \
+        --path /etc/hyperledger/chaincode --lang golang --label ccv1
+    
+    docker exec cli peer lifecycle chaincode install chaincode.tar.gz
+    
+    # Get package ID
+    docker exec cli peer lifecycle chaincode queryinstalled >&log.txt
+    PACKAGE_ID=$(sed -n '/Package/{s/^Package ID: //; s/, Label:.*$//; p;}' log.txt)
+    log_info "Chaincode package ID: $PACKAGE_ID"
+    
+    approve_and_commit_chaincode
+}
 
-# Generate the channel configuration 
-./generate.sh ${ORGANIZATION_NAME_LOWERCASE}channel $NAME_OF_ORGANIZATION
-sleep 2
+# Approve and commit chaincode
+approve_and_commit_chaincode() {
+    log_info "Approving and committing chaincode"
+    
+    docker exec cli peer lifecycle chaincode approveformyorg \
+        -o "orderer1.$DOMAIN_OF_ORGANIZATION:7050" \
+        --ordererTLSHostnameOverride "orderer1.$DOMAIN_OF_ORGANIZATION" \
+        --channelID "$ORGANIZATION_CHANNEL" \
+        --name chaincode --version 1.0 --sequence 1 \
+        --tls --cafile "/etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" \
+        --package-id "${PACKAGE_ID}"
+    
+    docker exec cli peer lifecycle chaincode commit \
+        -o "orderer1.$DOMAIN_OF_ORGANIZATION:7050" \
+        --channelID "$ORGANIZATION_CHANNEL" \
+        --name chaincode --version 1.0 --sequence 1 \
+        --tls --cafile "/etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" \
+        --peerAddresses "peer1.$DOMAIN_OF_ORGANIZATION:7051" \
+        --tlsRootCertFiles "/etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt"
+  }
 
-# Start the network with docker-compose
-docker-compose -f docker-compose.yml up -d peer peer2 couchdb cli 
-sleep 2
+# Main function
+main() {
+    # Check if log file exists, if not create it
+    touch "$LOG_FILE"
+    log_info "Starting network deployment script"
+    
+    # Get organization details
+    read -rp "Organization Name: " org_name
+    read -rp "Organization Domain: " org_domain
+    
+    # Initialize environment
+    init_environment "$org_name" "$org_domain"
+    
+    # Execute deployment steps
+    setup_network_config
+    setup_ca
+    setup_crypto_material
+    deploy_network
+    deploy_chaincode
+    
+    log_info "Network deployment completed successfully"
+}
 
-docker-compose -f docker-compose.yml up -d orderer2 
-docker-compose -f docker-compose.yml up -d orderer3
-
-# Join the orders to the channel
-docker exec cli osnadmin channel join -o orderer1.$DOMAIN_OF_ORGANIZATION:7053 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/server.key 
-
-docker exec cli osnadmin channel join -o orderer2.$DOMAIN_OF_ORGANIZATION:8053 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer2.$DOMAIN_OF_ORGANIZATION/tls/server.key 
-
-docker exec cli osnadmin channel join -o orderer3.$DOMAIN_OF_ORGANIZATION:9053 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --config-block /etc/hyperledger/artifacts/channel.tx --ca-file /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --client-cert /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/server.crt --client-key /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer3.$DOMAIN_OF_ORGANIZATION/tls/server.key 
-
-sleep 3
-
-docker exec cli peer channel fetch 0 channel.block -c ${ORGANIZATION_NAME_LOWERCASE}channel -o orderer1.${DOMAIN_OF_ORGANIZATION}:7050 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.${DOMAIN_OF_ORGANIZATION}/tls/ca.crt
-
-sleep 1
-
-docker exec cli peer channel join -b channel.block
-
-docker exec -e CORE_PEER_LOCALMSPID="${NAME_OF_ORGANIZATION}MSP" -e CORE_PEER_ADDRESS="peer2.$DOMAIN_OF_ORGANIZATION:7051" -e CORE_PEER_MSPCONFIGPATH="/etc/hyperledger/crypto-config/peerOrganizations/users/Admin@peer2.$DOMAIN_OF_ORGANIZATION/msp" -e CORE_PEER_TLS_ROOTCERT_FILE="/etc/hyperledger/crypto-config/peerOrganizations/peers/peer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" cli peer channel fetch 0 channel.block -c ${ORGANIZATION_NAME_LOWERCASE}channel -o orderer1.${DOMAIN_OF_ORGANIZATION}:7050 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.${DOMAIN_OF_ORGANIZATION}/tls/ca.crt
-
-docker exec -e CORE_PEER_LOCALMSPID="${NAME_OF_ORGANIZATION}MSP" -e CORE_PEER_ADDRESS="peer2.$DOMAIN_OF_ORGANIZATION:7051" -e CORE_PEER_MSPCONFIGPATH="/etc/hyperledger/crypto-config/peerOrganizations/users/Admin@peer2.$DOMAIN_OF_ORGANIZATION/msp" -e CORE_PEER_TLS_ROOTCERT_FILE="/etc/hyperledger/crypto-config/peerOrganizations/peers/peer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" cli peer channel join -b channel.block
-
-# # Package chaincode
-docker exec cli peer lifecycle chaincode package chaincode.tar.gz --path /etc/hyperledger/chaincode --lang node --label ccv1
-
-# Install the chaincode
-docker exec cli peer lifecycle chaincode install chaincode.tar.gz
-
-docker exec cli peer lifecycle chaincode queryinstalled >&log.txt
-export PACKAGE_ID=`sed -n '/Package/{s/^Package ID: //; s/, Label:.*$//; p;}' log.txt`
-
-echo $PACKAGE_ID
-
-# Approve chaincode for org
-docker exec cli peer lifecycle chaincode approveformyorg -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 --ordererTLSHostnameOverride orderer1.$DOMAIN_OF_ORGANIZATION --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --name chaincode --version 1.0 --sequence 1 --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --package-id ${PACKAGE_ID}
-
-# Check commit readiness
-docker exec cli peer lifecycle chaincode checkcommitreadiness --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --name chaincode --version 1.0 --sequence 1 --tls true --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --output json
-
-# Commit the chaincode
-docker exec cli peer lifecycle chaincode commit -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --name chaincode --version 1.0 --sequence 1 --tls true --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --peerAddresses peer1.$DOMAIN_OF_ORGANIZATION:7051 --tlsRootCertFiles /etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt 
-
-docker exec cli peer chaincode invoke -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 -C ${ORGANIZATION_NAME_LOWERCASE}channel -n chaincode -c '{"Args":["invokeTransaction","1","{anythingHereAsJsonPayload}"]}' --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
-
-sleep 2 
-
-docker exec cli peer chaincode query -o orderer1.$DOMAIN_OF_ORGANIZATION:7050 -C ${ORGANIZATION_NAME_LOWERCASE}channel -n chaincode -c '{"Args":["queryBlockchain","1"]}' --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
-
-# Query Installed chaincode on peer
-docker exec cli peer lifecycle chaincode queryinstalled --peerAddresses peer1.$DOMAIN_OF_ORGANIZATION:7051 --tlsRootCertFiles /etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
-
-# Query commited chaincode on the channel
-docker exec cli peer lifecycle chaincode querycommitted -o orderer.$DOMAIN_OF_ORGANIZATION:7050 --channelID ${ORGANIZATION_NAME_LOWERCASE}channel --tls --cafile /etc/hyperledger/crypto-config/ordererOrganizations/orderers/orderer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt --peerAddresses peer1.$DOMAIN_OF_ORGANIZATION:7051 --tlsRootCertFiles /etc/hyperledger/crypto-config/peerOrganizations/peers/peer1.$DOMAIN_OF_ORGANIZATION/tls/ca.crt
-
-echo NETWORK DEPLOYMENT COMPLETED SUCCESSFULLY
+# Execute main function
+main

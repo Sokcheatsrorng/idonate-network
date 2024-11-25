@@ -5,7 +5,7 @@ services:
   ca:
     container_name: ca.${DOMAIN_OF_ORGANIZATION}
     image: hyperledger/fabric-ca:1.4.9
-    command: sh -c 'fabric-ca-server start -d -b idonateadmin:idonatepw --port 7054 --cfg.identities.allowremove'
+    command: sh -c 'fabric-ca-server start -d -b idonateAdmin:idonatepw --port 7054 --cfg.identities.allowremove'
     environment:
       - FABRIC_LOGGING_SPEC=INFO
       - FABRIC_CA_SERVER_HOME=/etc/hyperledger/fabric-ca
@@ -55,7 +55,6 @@ services:
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/peer/peers/peer1.${DOMAIN_OF_ORGANIZATION}/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/peer/peers/peer1.${DOMAIN_OF_ORGANIZATION}/tls/ca.crt
     working_dir: /etc/hyperledger/peer
-    command: peer node start
     ports:
       - 7051:7051
       - 9444:9444
@@ -98,7 +97,6 @@ services:
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/peer/peers/peer2.${DOMAIN_OF_ORGANIZATION}/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/peer/peers/peer2.${DOMAIN_OF_ORGANIZATION}/tls/ca.crt
     working_dir: /etc/hyperledger/peer
-    command: peer node start
     ports:
       - 8051:8051
     volumes:

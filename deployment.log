@@ -1,0 +1,388 @@
+[0;32m[INFO][0m 2024-11-25 10:16:10 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 10:16:20 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 10:16:20 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 10:16:20 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 10:16:20 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 10:16:20 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 10:16:23 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 10:23:18 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 10:23:25 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 10:23:25 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 10:23:25 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 10:23:26 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 10:23:26 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 10:25:33 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 10:26:12 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 10:26:19 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 10:26:19 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 10:26:19 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 10:26:19 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 10:26:19 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 10:26:23 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 10:26:23 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 10:26:23 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 10:26:24 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 10:26:24 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 10:26:24 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 10:40:49 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 10:40:53 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 10:40:53 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 10:40:53 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 10:40:53 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 10:40:53 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 10:40:56 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 10:40:56 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 10:40:56 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 10:40:57 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 10:40:57 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 10:40:58 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 10:48:50 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Setting up cryptographic material
+[1;33m[WARNING][0m 2024-11-25 10:48:57 - Target directory ./crypto-config already exists. Clearing its contents...
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Moving cryptographic material from ./org1Ca/client/crypto-config to ./crypto-config
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Setting permissions for ./crypto-config
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Setting up orderer TLS certificates...
+[0;32m[INFO][0m 2024-11-25 10:48:57 - Setting up TLS for orderer1
+[0;31m[ERROR][0m 2024-11-25 10:48:57 - Source TLS directory ./org1Ca/orderer1/tls does not exist
+[0;32m[INFO][0m 2024-11-25 10:53:51 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 10:53:55 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 10:53:55 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 10:53:55 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 10:53:55 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 10:53:55 - Setting up cryptographic material
+[0;31m[ERROR][0m 2024-11-25 10:53:55 - Source directory ./org1Ca/client/crypto-config does not exist
+[0;32m[INFO][0m 2024-11-25 10:55:11 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 10:55:15 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 10:55:15 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 10:55:15 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 10:55:15 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 10:55:15 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 10:55:29 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:00:19 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 11:00:23 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:00:23 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:00:23 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 11:00:23 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 11:00:23 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 11:00:37 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:00:37 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 11:00:37 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 11:00:38 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 11:00:38 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 11:00:39 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 11:04:05 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 11:04:09 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:04:09 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:04:09 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 11:04:09 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 11:04:09 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 11:04:12 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 11:04:12 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:04:12 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 11:04:12 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 11:04:13 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 11:04:16 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 11:04:16 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:04:17 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 11:04:17 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 11:04:17 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 11:04:18 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 11:04:18 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 11:04:21 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 11:04:22 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:04:22 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 11:04:22 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 11:04:22 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 11:04:23 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 11:04:23 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 11:09:18 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 11:09:22 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:09:22 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:09:22 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 11:09:25 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 11:09:25 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:09:26 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 11:09:26 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 11:09:26 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 11:09:27 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 11:10:41 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 11:10:45 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:10:45 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:10:45 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 11:10:45 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 11:10:45 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 11:10:48 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 11:10:48 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:10:48 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 11:10:49 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 11:10:49 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 11:10:49 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 11:10:50 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 11:11:57 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 11:12:01 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:12:01 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:12:01 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 11:12:01 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 11:12:01 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:12:01 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:12:01 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 11:12:04 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 11:12:04 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:12:04 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 11:12:05 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 11:12:05 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 11:12:05 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 11:12:06 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 11:12:57 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 11:13:03 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:13:03 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:13:03 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 11:13:03 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 11:13:03 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:13:03 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:13:03 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 11:13:16 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 11:13:16 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 11:15:03 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Setting up cryptographic material
+[1;33m[WARNING][0m 2024-11-25 11:15:06 - Target directory ./crypto-config already exists. Clearing its contents...
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Moving cryptographic material from ./org1Ca/client/crypto-config to ./crypto-config
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Setting permissions for ./crypto-config
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Setting up orderer TLS certificates...
+[0;32m[INFO][0m 2024-11-25 11:15:06 - Setting up TLS for orderer1
+[0;32m[INFO][0m 2024-11-25 11:17:18 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 11:17:21 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 11:17:21 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 11:17:21 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 11:17:21 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 11:17:21 - Setting up cryptographic material
+[0;31m[ERROR][0m 2024-11-25 11:17:21 - Source directory ./org1Ca/client/crypto-config does not exist
+[0;32m[INFO][0m 2024-11-25 12:13:43 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 12:13:46 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 12:13:46 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 12:13:46 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 12:13:51 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 12:13:51 - Setting up cryptographic material
+[0;31m[ERROR][0m 2024-11-25 12:13:51 - Source directory ./org1Ca/client/crypto-config does not exist
+[0;32m[INFO][0m 2024-11-25 12:30:29 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 12:30:37 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 12:30:37 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 12:30:37 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 12:30:41 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 12:30:41 - Setting up cryptographic material
+[0;31m[ERROR][0m 2024-11-25 12:30:41 - Source directory ./org2Ca/client/crypto-config does not exist
+[0;32m[INFO][0m 2024-11-25 12:31:40 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 12:31:45 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 12:31:45 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 12:31:45 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 12:31:45 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 12:31:45 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 12:31:45 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 12:31:45 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 12:31:59 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 12:31:59 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 12:33:07 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 12:33:20 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 12:33:20 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 12:33:20 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 12:33:20 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 12:33:20 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 12:33:20 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 12:33:20 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 12:33:34 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 12:33:34 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 13:20:12 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:20:15 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:20:15 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:20:15 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:20:20 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:20:20 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:20:20 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:20:20 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:20:23 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 13:20:23 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 13:23:34 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:23:37 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:23:37 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:23:37 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:23:37 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:23:37 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:23:37 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:23:37 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:23:40 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 13:23:41 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 13:28:43 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:28:49 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:28:49 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:28:49 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:28:49 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:28:49 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:29:16 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:29:20 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:29:20 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:29:20 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:29:20 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:29:20 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:29:34 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:29:39 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:29:39 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:29:39 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:29:39 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:29:39 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:30:51 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:30:56 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:30:56 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:30:56 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:30:56 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:30:56 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:31:41 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:31:45 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:31:45 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:31:45 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:31:45 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:31:45 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:39:44 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:39:46 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:39:46 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:39:46 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:39:47 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:39:47 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:40:00 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 13:40:00 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 13:43:15 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:43:18 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:43:18 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:43:18 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:43:19 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:43:19 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:43:32 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 13:43:33 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 13:48:54 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 13:48:58 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 13:48:58 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 13:48:58 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 13:48:58 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 13:48:58 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 13:49:12 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 13:49:12 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 14:02:09 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:02:15 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:02:15 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:02:15 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:02:15 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:02:15 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:02:18 - Giving full permissions to CA folder
+[0;32m[INFO][0m 2024-11-25 14:02:18 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 14:07:57 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:08:03 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:08:03 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:08:03 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:08:03 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:08:03 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:08:17 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 14:10:38 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:10:42 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:10:42 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:10:42 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:10:43 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:10:43 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:10:56 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 14:12:11 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:12:18 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:12:18 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:12:18 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:12:18 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:12:18 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:12:32 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 14:12:33 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 14:12:34 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 14:12:34 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 14:12:36 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 14:12:37 - Network deployment completed successfully
+[0;32m[INFO][0m 2024-11-25 14:13:13 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:13:20 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:13:20 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:13:20 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:13:21 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:13:21 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:13:34 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 14:13:35 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 14:13:36 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 14:13:37 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 14:13:38 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting up cryptographic material
+[1;33m[WARNING][0m 2024-11-25 14:13:39 - Target directory ./crypto-config already exists. Clearing its contents...
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Moving cryptographic material from ./org14Ca/client/crypto-config to ./crypto-config
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting permissions for ./crypto-config
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting up orderer TLS certificates...
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting up TLS for orderer1
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting up TLS for orderer2
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting up TLS for orderer3
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting up peer TLS certificates...
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting up TLS for peer1
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Setting up TLS for peer2
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Cryptographic material setup completed successfully
+[0;32m[INFO][0m 2024-11-25 14:13:39 - Deploying network
+[0;32m[INFO][0m 2024-11-25 14:13:44 - Joining orderers to channel
+[0;32m[INFO][0m 2024-11-25 14:16:58 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:17:02 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:17:02 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:17:02 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:17:03 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:17:03 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:17:07 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 14:17:52 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:17:56 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:17:56 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:17:56 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:17:57 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:17:57 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:18:10 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 14:18:53 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:18:58 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:18:58 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:18:58 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:18:58 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:18:58 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:19:11 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 14:19:12 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-25 14:19:13 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-25 14:19:14 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-25 14:19:15 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting up cryptographic material
+[1;33m[WARNING][0m 2024-11-25 14:19:16 - Target directory ./crypto-config already exists. Clearing its contents...
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Moving cryptographic material from ./org33Ca/client/crypto-config to ./crypto-config
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting permissions for ./crypto-config
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting up orderer TLS certificates...
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting up TLS for orderer1
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting up TLS for orderer2
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting up TLS for orderer3
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting up peer TLS certificates...
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting up TLS for peer1
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Setting up TLS for peer2
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Cryptographic material setup completed successfully
+[0;32m[INFO][0m 2024-11-25 14:19:16 - Deploying network
+[0;32m[INFO][0m 2024-11-25 14:19:21 - Joining orderers to channel
+[0;32m[INFO][0m 2024-11-25 14:19:21 - Joining peers to channel
+[0;32m[INFO][0m 2024-11-25 14:27:09 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:27:12 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:27:12 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:27:12 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:27:14 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:27:14 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:27:17 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-25 14:30:18 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Network configuration completed
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-25 14:30:37 - Generating identity for orderer1

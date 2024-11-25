@@ -1,11 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
-# export PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:${PWD}/../bin:${PWD}:$PATH
+export PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:${PWD}/../bin:${PWD}:$PATH
 
 # Set the Fabric configuration path
-export FABRIC_CFG_PATH=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fabric-idonate-network
-# echo"Fabric-Config-Path: $FABRIC_CFG_PATH"
+export FABRIC_CFG_PATH= ${PWD}
 # Set the binary directory (no spaces around `=`)
-export BINARY_DIR=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fabric-idonate-network/bin
+# export BINARY_DIR=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fabric-idonate-network/bin
 
 # Capture channel and organization names from arguments
 CHANNEL_NAME=donationchannel
@@ -26,7 +25,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 # Generate anchor peer transaction for the specified organization
-configtxgen -profile Channel -outputAnchorPeersUpdate ./config/${ORGANIZATION_NAME}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg ${ORGANIZATION_NAME}MSP
+configtxgen -profile Channel -outputAnchorPeersUpdate ./config/${ORGANIZATION_NAME}MSPAnchors.tx -channelID $CHANNEL_NAME -asOrg ${ORGANIZATION_NAME}MSP
 
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate anchor peer update for MSP..."

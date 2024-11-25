@@ -1,33 +1,23 @@
-[0;32m[INFO][0m 2024-11-25 16:14:42 - Starting cleanup process...
-[0;32m[INFO][0m 2024-11-25 16:14:42 - Checking system requirements...
-[1;33m[WARNING][0m 2024-11-25 16:14:42 - Script may need sudo privileges for some operations
-[0;32m[INFO][0m 2024-11-25 16:14:42 - System requirements check completed
-[0;32m[INFO][0m 2024-11-25 16:14:42 - Starting Docker container cleanup...
-[0;32m[INFO][0m 2024-11-25 16:14:42 - Removing container: orderer3.Org1.com
-[0;32m[INFO][0m 2024-11-25 16:14:42 - Removing container: orderer2.Org1.com
-[0;32m[INFO][0m 2024-11-25 16:14:42 - Removing container: cli
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Removing container: peer1.Org1.com
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Removing container: peer2.Org1.com
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Removing container: couchdb
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Removing container: orderer1.Org1.com
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Removing container: ca.Org1.com
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Container cleanup completed. Removed 8 containers
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Starting Docker image cleanup...
-[0;32m[INFO][0m 2024-11-25 16:14:43 - No dev-peer images found for deletion
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Starting file system cleanup...
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Path does not exist, skipping: org1Ca/crypto-config/
-[0;32m[INFO][0m 2024-11-25 16:14:43 - Removing: artifacts/
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Successfully removed: artifacts/
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Removing: ./config/
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Successfully removed: ./config/
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Path does not exist, skipping: chaincode/node_modules
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Removing: configtx.yaml
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Successfully removed: configtx.yaml
-[0;32m[INFO][0m 2024-11-25 16:14:47 - File system cleanup completed. Removed 3 items
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Creating required directories...
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Creating directory: artifacts
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Successfully created: artifacts
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Creating directory: config
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Successfully created: config
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Directory creation completed
-[0;32m[INFO][0m 2024-11-25 16:14:47 - Cleanup process completed successfully
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting cleanup process...
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Checking system requirements...
+[0;32m[INFO][0m 2024-11-25 14:30:24 - System requirements check completed
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting Docker container cleanup...
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Container cleanup completed. Removed 0 containers
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting Docker image cleanup...
+[0;32m[INFO][0m 2024-11-25 14:30:24 - No dev-peer images found for deletion
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting file system cleanup...
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Path does not exist, skipping: org1Ca/crypto-config/
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Removing: artifacts/
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Successfully removed: artifacts/
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Removing: ./config/
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Successfully removed: ./config/
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Path does not exist, skipping: chaincode/node_modules
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Path does not exist, skipping: configtx.yaml
+[0;32m[INFO][0m 2024-11-25 14:30:24 - File system cleanup completed. Removed 2 items
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Creating required directories...
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Creating directory: artifacts
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Successfully created: artifacts
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Creating directory: config
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Successfully created: config
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Directory creation completed
+[0;32m[INFO][0m 2024-11-25 14:30:24 - Cleanup process completed successfully
