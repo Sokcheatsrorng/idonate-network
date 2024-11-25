@@ -7,7 +7,7 @@ networks:
 services:
   ca:
     container_name: ca.${DOMAIN_OF_ORGANIZATION}
-    image: hyperledger/fabric-ca
+    image: hyperledger/fabric-ca:1.4.9
     command: sh -c 'fabric-ca-server start -d -b admin:adminpw --port 7054 --cfg.identities.allowremove'
     environment:
       - FABRIC_LOGGING_SPEC=grpc=debug:info
@@ -17,7 +17,7 @@ services:
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_CA_NAME=ca.${DOMAIN_OF_ORGANIZATION}
       - FABRIC_CA_SERVER_CSR_CN=ca.${DOMAIN_OF_ORGANIZATION}
-      - FABRIC_CA_SERVER_CSR_HOSTS=ca.${DOMAIN_OF_ORGANIZATION},${HOST_IP_ADDRESS}
+      - FABRIC_CA_SERVER_CSR_HOSTS=ca.${DOMAIN_OF_ORGANIZATION},${HOST_COMPUTER_IP_ADDRESS}
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca/tlsca/ca.${ORGANIZATION_NAME_LOWERCASE}-key.pem
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca/tlsca/ca.${ORGANIZATION_NAME_LOWERCASE}-cert.pem
       - FABRIC_CA_SERVER_DEBUG=true

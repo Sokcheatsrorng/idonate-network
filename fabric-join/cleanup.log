@@ -1,0 +1,29 @@
+[0;32m[INFO][0m 2024-11-25 16:40:31 - Starting cleanup process...
+[0;32m[INFO][0m 2024-11-25 16:40:31 - Checking system requirements...
+[0;32m[INFO][0m 2024-11-25 16:40:31 - System requirements check completed
+[0;32m[INFO][0m 2024-11-25 16:40:31 - Starting Docker container cleanup...
+[0;32m[INFO][0m 2024-11-25 16:40:31 - Removing container: cli
+[0;32m[INFO][0m 2024-11-25 16:40:31 - Removing container: peer.Org1.com
+[0;32m[INFO][0m 2024-11-25 16:40:31 - Removing container: couchdb
+[0;32m[INFO][0m 2024-11-25 16:40:31 - Removing container: orderer.Org1.com
+[0;32m[INFO][0m 2024-11-25 16:40:31 - Removing container: ca.Org1.com
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Container cleanup completed. Removed 5 containers
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Starting Docker image cleanup...
+[0;32m[INFO][0m 2024-11-25 16:40:32 - No dev-peer images found for deletion
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Starting file system cleanup...
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Path does not exist, skipping: org13Ca/crypto-config/
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Removing: artifacts/
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Successfully removed: artifacts/
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Removing: ./config/
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Successfully removed: ./config/
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Path does not exist, skipping: chaincode/node_modules
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Removing: configtx.yaml
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Successfully removed: configtx.yaml
+[0;32m[INFO][0m 2024-11-25 16:40:32 - File system cleanup completed. Removed 3 items
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Creating required directories...
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Creating directory: artifacts
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Successfully created: artifacts
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Creating directory: config
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Successfully created: config
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Directory creation completed
+[0;32m[INFO][0m 2024-11-25 16:40:32 - Cleanup process completed successfully

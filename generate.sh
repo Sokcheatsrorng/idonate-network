@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
-export PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:${PWD}/../bin:${PWD}:$PATH
+# export PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:${PWD}/../bin:${PWD}:$PATH
 
 # Set the Fabric configuration path
-export FABRIC_CFG_PATH= ${PWD}
+export FABRIC_CFG_PATH=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fabric-idonate-network
+# echo"Fabric-Config-Path: $FABRIC_CFG_PATH"
 # Set the binary directory (no spaces around `=`)
-# export BINARY_DIR=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fabric-idonate-network/bin
+export BINARY_DIR=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fabric-idonate-network/bin
 
 # Capture channel and organization names from arguments
 CHANNEL_NAME=donationchannel

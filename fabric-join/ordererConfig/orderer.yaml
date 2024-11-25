@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 General:
-  ListenAddress: 127.0.0.1
+  ListenAddress: 172.0.0.1
   ListenPort: 7050
 
   # TLS: TLS settings for the GRPC server.
@@ -84,7 +84,7 @@ Debug:
 
 Operations:
   # host and port for the operations server
-  ListenAddress: 127.0.0.1:8443
+  ListenAddress: 172.0.0.1:8443
 
   # TLS configuration for the operations endpoint
   TLS:
@@ -112,13 +112,13 @@ Metrics:
     Prefix:
 
 Consensus:
-  # The allowed key-value pairs here depend on consensus plugin. For etcd/raft,
-  # we use following options:
+  # # The allowed key-value pairs here depend on consensus plugin. For etcd/raft,
+  # # we use following options:
 
-  # WALDir specifies the location at which Write Ahead Logs for etcd/raft are
-  # stored. Each channel will have its own subdir named after channel ID.
-  WALDir: /var/hyperledger/production/orderer/etcdraft/wal
+  # # WALDir specifies the location at which Write Ahead Logs for etcd/raft are
+  # # stored. Each channel will have its own subdir named after channel ID.
+  # WALDir: /var/hyperledger/production/orderer/etcdraft/wal
 
-  # SnapDir specifies the location at which snapshots for etcd/raft are
-  # stored. Each channel will have its own subdir named after channel ID.
-  SnapDir: /var/hyperledger/production/orderer/etcdraft/snapshot
+  # # SnapDir specifies the location at which snapshots for etcd/raft are
+  # # stored. Each channel will have its own subdir named after channel ID.
+  # SnapDir: /var/hyperledger/production/orderer/etcdraft/snapshot
