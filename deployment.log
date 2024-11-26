@@ -386,3 +386,36 @@
 [0;32m[INFO][0m 2024-11-25 14:30:24 - Network configuration completed
 [0;32m[INFO][0m 2024-11-25 14:30:24 - Starting Certificate Authority
 [0;32m[INFO][0m 2024-11-25 14:30:37 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-26 08:21:45 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-26 08:21:49 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-26 08:21:49 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-26 08:21:49 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-26 08:21:54 - Network configuration completed
+[0;32m[INFO][0m 2024-11-26 08:21:54 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-26 08:21:57 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-26 08:24:55 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-26 08:25:08 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-26 08:25:08 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-26 08:25:08 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-26 08:25:08 - Network configuration completed
+[0;32m[INFO][0m 2024-11-26 08:25:08 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-26 08:25:21 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-26 08:25:22 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-26 08:25:23 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-26 08:25:24 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-26 08:25:25 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting up cryptographic material
+[1;33m[WARNING][0m 2024-11-26 08:25:26 - Target directory ./crypto-config already exists. Clearing its contents...
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Moving cryptographic material from ./kuntheabophaCa/client/crypto-config to ./crypto-config
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting permissions for ./crypto-config
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting up orderer TLS certificates...
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting up TLS for orderer1
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting up TLS for orderer2
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting up TLS for orderer3
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting up peer TLS certificates...
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting up TLS for peer1
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Setting up TLS for peer2
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Cryptographic material setup completed successfully
+[0;32m[INFO][0m 2024-11-26 08:25:26 - Deploying network
+[0;32m[INFO][0m 2024-11-26 08:25:31 - Joining orderers to channel
+[0;32m[INFO][0m 2024-11-26 08:25:31 - Joining peers to channel
