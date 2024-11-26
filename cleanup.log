@@ -1,23 +1,32 @@
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting cleanup process...
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Checking system requirements...
-[0;32m[INFO][0m 2024-11-25 14:30:24 - System requirements check completed
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting Docker container cleanup...
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Container cleanup completed. Removed 0 containers
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting Docker image cleanup...
-[0;32m[INFO][0m 2024-11-25 14:30:24 - No dev-peer images found for deletion
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Starting file system cleanup...
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Path does not exist, skipping: org1Ca/crypto-config/
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Removing: artifacts/
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Successfully removed: artifacts/
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Removing: ./config/
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Successfully removed: ./config/
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Path does not exist, skipping: chaincode/node_modules
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Path does not exist, skipping: configtx.yaml
-[0;32m[INFO][0m 2024-11-25 14:30:24 - File system cleanup completed. Removed 2 items
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Creating required directories...
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Creating directory: artifacts
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Successfully created: artifacts
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Creating directory: config
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Successfully created: config
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Directory creation completed
-[0;32m[INFO][0m 2024-11-25 14:30:24 - Cleanup process completed successfully
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Starting cleanup process...
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Checking system requirements...
+[0;32m[INFO][0m 2024-11-26 00:50:51 - System requirements check completed
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Starting Docker container cleanup...
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing container: orderer3.Org1.com
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing container: orderer2.Org1.com
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing container: cli
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing container: peer1.Org1.com
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing container: peer2.Org1.com
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing container: couchdb
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing container: orderer1.Org1.com
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing container: ca.Org1.com
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Container cleanup completed. Removed 8 containers
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Starting Docker image cleanup...
+[0;32m[INFO][0m 2024-11-26 00:50:51 - No dev-peer images found for deletion
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Starting file system cleanup...
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Path does not exist, skipping: orgqCa/crypto-config/
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing: artifacts/
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Successfully removed: artifacts/
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing: ./config/
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Successfully removed: ./config/
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Path does not exist, skipping: chaincode/node_modules
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Removing: configtx.yaml
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Successfully removed: configtx.yaml
+[0;32m[INFO][0m 2024-11-26 00:50:51 - File system cleanup completed. Removed 3 items
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Creating required directories...
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Creating directory: artifacts
+[0;32m[INFO][0m 2024-11-26 00:50:52 - Successfully created: artifacts
+[0;32m[INFO][0m 2024-11-26 00:50:52 - Creating directory: config
+[0;32m[INFO][0m 2024-11-26 00:50:52 - Successfully created: config
+[0;32m[INFO][0m 2024-11-26 00:50:52 - Directory creation completed
+[0;32m[INFO][0m 2024-11-26 00:50:52 - Cleanup process completed successfully

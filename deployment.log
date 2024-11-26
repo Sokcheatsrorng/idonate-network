@@ -386,3 +386,29 @@
 [0;32m[INFO][0m 2024-11-25 14:30:24 - Network configuration completed
 [0;32m[INFO][0m 2024-11-25 14:30:24 - Starting Certificate Authority
 [0;32m[INFO][0m 2024-11-25 14:30:37 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-26 00:50:45 - Starting network deployment script
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Initializing environment variables
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-11-26 00:50:51 - Setting up network configuration
+[0;32m[INFO][0m 2024-11-26 00:50:52 - Network configuration completed
+[0;32m[INFO][0m 2024-11-26 00:50:52 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-11-26 00:50:55 - Generating identity for orderer1
+[0;32m[INFO][0m 2024-11-26 00:50:56 - Generating identity for orderer2
+[0;32m[INFO][0m 2024-11-26 00:50:56 - Generating identity for orderer3
+[0;32m[INFO][0m 2024-11-26 00:50:57 - Generating identity for peer1
+[0;32m[INFO][0m 2024-11-26 00:50:58 - Generating identity for peer2
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting up cryptographic material
+[1;33m[WARNING][0m 2024-11-26 00:50:59 - Target directory ./crypto-config already exists. Clearing its contents...
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Moving cryptographic material from ./orgqCa/client/crypto-config to ./crypto-config
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting permissions for ./crypto-config
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting up orderer TLS certificates...
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting up TLS for orderer1
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting up TLS for orderer2
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting up TLS for orderer3
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting up peer TLS certificates...
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting up TLS for peer1
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Setting up TLS for peer2
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Cryptographic material setup completed successfully
+[0;32m[INFO][0m 2024-11-26 00:50:59 - Deploying network
+[0;32m[INFO][0m 2024-11-26 00:51:05 - Joining orderers to channel
+[0;32m[INFO][0m 2024-11-26 00:51:05 - Joining peers to channel
