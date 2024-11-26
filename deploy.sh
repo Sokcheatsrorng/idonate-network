@@ -119,8 +119,9 @@ docker exec -e CORE_PEER_LOCALMSPID="${NAME_OF_ORGANIZATION}MSP" -e CORE_PEER_AD
 
 docker exec -e CORE_PEER_LOCALMSPID="${NAME_OF_ORGANIZATION}MSP" -e CORE_PEER_ADDRESS="peer2.$DOMAIN_OF_ORGANIZATION:7051" -e CORE_PEER_MSPCONFIGPATH="/etc/hyperledger/crypto-config/peerOrganizations/users/Admin@peer2.$DOMAIN_OF_ORGANIZATION/msp" -e CORE_PEER_TLS_ROOTCERT_FILE="/etc/hyperledger/crypto-config/peerOrganizations/peers/peer2.$DOMAIN_OF_ORGANIZATION/tls/ca.crt" cli peer channel join -b channel.block
 
+
 # # Package chaincode
-docker exec cli peer lifecycle chaincode package chaincode.tar.gz --path /etc/hyperledger/chaincode --lang node --label ccv1
+docker exec cli peer lifecycle chaincode package chaincode.tar.gz --path /etc/hyperledger/chaincode --lang golang --label my_chaincde_v1
 
 # Install the chaincode
 docker exec cli peer lifecycle chaincode install chaincode.tar.gz

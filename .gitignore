@@ -11,3 +11,4 @@ client/node_modules/
 client/package-lock.json
 client/tls-cert.pem
 client/wallet/
+git rm -r --cached bin/

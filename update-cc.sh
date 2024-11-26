@@ -1,17 +1,14 @@
 VERSION=$1
 SEQUENCE=$2
 
-ORGANIZATION_DOMAIN=
-CHAINCODE_NAME=
-CHANNEL=
+ORGANIZATION_DOMAIN="Org1"
+CHAINCODE_NAME="chaincode"
+CHANNEL=donationalchannel
 
-pushd chaincode
-npm install
-npm run build
-popd 
+
 
 # Package chaincode
-docker exec cli peer lifecycle chaincode package $CHAINCODE_NAME.tar.gz --path /etc/hyperledger/chaincode --lang node --label ccv1
+docker exec cli peer lifecycle chaincode package $CHAINCODE_NAME.tar.gz --path /etc/hyperledger/chaincode --lang golang --label ccv1
 
 # Install the chaincode
 docker exec cli peer lifecycle chaincode install $CHAINCODE_NAME.tar.gz >&ccVer.txt
