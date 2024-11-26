@@ -11,5 +11,5 @@ Using Justfile to Set Up Prometheus-grafana Dashboard to Monitor Network
 2. just dashboard stop 
 ```
 # The first Error is about when set up ca 
-![alt text](image-1.png)
+<img src="./image.png">
 
