@@ -3,12 +3,4 @@ config/
 crypto-config/
 log.txt
 configtx.yaml
-client/ca.crt
-client/connection-org.json
-client/connections.yml
-client/dist/
-client/node_modules/
-client/package-lock.json
-client/tls-cert.pem
-client/wallet/
 git rm -r --cached bin/

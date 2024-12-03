@@ -9,7 +9,9 @@ export FABRIC_CFG_PATH=/home/sokcheat/blockchain-cstad/ledgerlift/hyperledger-fa
 
 # Capture channel and organization names from arguments
 CHANNEL_NAME=donationchannel
-ORGANIZATION_NAME=$2
+# ORGANIZATION_NAME=$2
+export ORGANIZATION_NAME=$ORGANIZATION_NAME
+
 
 # Create config directory if it doesn't exist
 mkdir -p config/
@@ -18,7 +20,7 @@ mkdir -p config/
 rm -fr config/*
 
 # Generate the channel configuration transaction
-configtxgen -profile Channel -outputBlock ./config/channel.tx -channelID $CHANNEL_NAME
+configtxgen -profile Channel -outputBlock ./config/channel.tx -channelID donationchannel
 
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate channel configuration transaction..."
@@ -26,7 +28,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 # Generate anchor peer transaction for the specified organization
-configtxgen -profile Channel -outputAnchorPeersUpdate ./config/${ORGANIZATION_NAME}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg ${ORGANIZATION_NAME}MSP
+configtxgen -profile Channel -outputAnchorPeersUpdate ./config/${ORGANIZATION_NAME}MSPanchors.tx -channelID donationchannel -asOrg ${ORGANIZATION_NAME}MSP
 
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate anchor peer update for MSP..."
