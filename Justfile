@@ -1,4 +1,4 @@
-#install binary into the project
+##  install binary into the project
 
 binary option:
     #!/bin/bash
@@ -8,7 +8,7 @@ binary option:
             bash ./scripts/installBinary.sh 
             ;;
         *)
-            echo "====================> ❌ Invalid Option"
+            echo "====================> ❌ Invalid Option( ==> just binary | install )"
             ;;
     esac
 

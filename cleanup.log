@@ -1,25 +1,23 @@
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Starting cleanup process...
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Checking system requirements...
-[0;32m[INFO][0m 2024-12-09 08:52:16 - System requirements check completed
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Starting Docker container cleanup...
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Removing container: 3a832a9f809e_ca.Org1.com
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Container cleanup completed. Removed 1 containers
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Starting Docker image cleanup...
-[0;32m[INFO][0m 2024-12-09 08:52:16 - No dev-peer images found for deletion
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Starting file system cleanup...
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Path does not exist, skipping: org2Ca/crypto-config/
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Removing: artifacts/
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Successfully removed: artifacts/
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Removing: ./config/
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Successfully removed: ./config/
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Path does not exist, skipping: chaincode/node_modules
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Removing: configtx.yaml
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Successfully removed: configtx.yaml
-[0;32m[INFO][0m 2024-12-09 08:52:16 - File system cleanup completed. Removed 3 items
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Creating required directories...
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Creating directory: artifacts
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Successfully created: artifacts
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Creating directory: config
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Successfully created: config
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Directory creation completed
-[0;32m[INFO][0m 2024-12-09 08:52:16 - Cleanup process completed successfully
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Starting cleanup process...
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Checking system requirements...
+[0;32m[INFO][0m 2024-12-09 10:45:48 - System requirements check completed
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Starting Docker container cleanup...
+[0;32m[INFO][0m 2024-12-09 10:45:48 - No containers found to clean up
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Starting Docker image cleanup...
+[0;32m[INFO][0m 2024-12-09 10:45:48 - No dev-peer images found for deletion
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Starting file system cleanup...
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Path does not exist, skipping: org1Ca/crypto-config/
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Removing: artifacts/
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Successfully removed: artifacts/
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Removing: ./config/
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Successfully removed: ./config/
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Path does not exist, skipping: chaincode/node_modules
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Path does not exist, skipping: configtx.yaml
+[0;32m[INFO][0m 2024-12-09 10:45:49 - File system cleanup completed. Removed 2 items
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Creating required directories...
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Creating directory: artifacts
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Successfully created: artifacts
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Creating directory: config
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Successfully created: config
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Directory creation completed
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Cleanup process completed successfully

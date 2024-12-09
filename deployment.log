@@ -572,3 +572,22 @@
 [0;32m[INFO][0m 2024-12-09 08:52:29 - Deploying network
 [0;32m[INFO][0m 2024-12-09 08:54:13 - Joining orderers to channel
 [0;32m[INFO][0m 2024-12-09 08:54:13 - Joining peers to channel
+[0;32m[INFO][0m 2024-12-09 10:26:09 - Starting network deployment script
+[0;32m[INFO][0m 2024-12-09 10:26:24 - Initializing environment variables
+[0;32m[INFO][0m 2024-12-09 10:26:24 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-12-09 10:26:24 - Setting up network configuration
+[0;32m[INFO][0m 2024-12-09 10:26:24 - Network configuration completed
+[0;32m[INFO][0m 2024-12-09 10:26:24 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-12-09 10:43:48 - Starting network deployment script
+[0;32m[INFO][0m 2024-12-09 10:44:02 - Initializing environment variables
+[0;32m[INFO][0m 2024-12-09 10:44:02 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-12-09 10:44:02 - Setting up network configuration
+[0;32m[INFO][0m 2024-12-09 10:44:02 - Network configuration completed
+[0;32m[INFO][0m 2024-12-09 10:44:02 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-12-09 10:45:39 - Starting network deployment script
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Initializing environment variables
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Environment variables initialized successfully
+[0;32m[INFO][0m 2024-12-09 10:45:48 - Setting up network configuration
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Network configuration completed
+[0;32m[INFO][0m 2024-12-09 10:45:49 - Starting Certificate Authority
+[0;32m[INFO][0m 2024-12-09 10:46:16 - Generating identity for orderer1
